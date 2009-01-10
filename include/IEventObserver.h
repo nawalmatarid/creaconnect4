@@ -1,7 +1,7 @@
 #ifndef IEVENTOBSERVER_H
 #define IEVENTOBSERVER_H
-
 #include <SFML/Window/Event.hpp>
+
 
 //**************************
 //Interface to observe events

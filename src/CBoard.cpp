@@ -86,6 +86,8 @@ CBoard::~CBoard()
 //**************************
 void CBoard::CreateBoard()
 {
+    m_bLine = false;
+
     for (int i = 0; i < DEFAULT_NUM_COLUMNS; i ++)
     {
         for (int j = 0; j < DEFAULT_NUM_ROWS; j++)
