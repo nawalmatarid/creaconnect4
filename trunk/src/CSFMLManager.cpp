@@ -54,7 +54,7 @@ CSFMLManager::~CSFMLManager()
 //Return Value : the single instance of the CSFMLManager
 //Note : None
 //**************************
-CSFMLManager* CSFMLManager::GetInstance(char * _szTitleWindow)
+CSFMLManager* CSFMLManager::GetSingleton(char * _szTitleWindow)
 {
     if( ms_Singleton == NULL )
         ms_Singleton = new CSFMLManager(_szTitleWindow);
@@ -73,6 +73,9 @@ void CSFMLManager::LoadSurfaces()
     CSpriteAnimation * Anim;
     std::string Dir;
 
+    //we load the font
+    m_Font.LoadFromFile(szFont.c_str());
+
     //We load the background
     Anim = new CSpriteAnimation(szBgDir.c_str());
 
@@ -82,6 +85,11 @@ void CSFMLManager::LoadSurfaces()
     Anim = new CSpriteAnimation(szBoardDir.c_str());
 
     m_ListAnimation.insert( std::pair<int, CSpriteAnimation *>(BOARD, Anim) );
+
+    //we load the reward
+    Anim = new CSpriteAnimation(szRewardDir.c_str());
+
+    m_ListAnimation.insert( std::pair<int, CSpriteAnimation *>(REWARD, Anim) );
 
     //We load the pawn colors
     for (int i = RED; i < (RED + NUM_COLOR); i++)
@@ -107,6 +115,7 @@ void CSFMLManager::LoadSurfaces()
         m_ListAnimation.insert( std::pair<int, CSpriteAnimation *>(i, Anim) );
     }
 
+    Anim = NULL;
 }
 
 //**************************
@@ -146,4 +155,11 @@ float CSFMLManager::GetElapsedTime()
 CSpriteAnimation * CSFMLManager::GetAnimation(int _NumAnimation)
 {
     return m_ListAnimation[_NumAnimation];
+}
+//**************************
+// Font
+//**************************
+sf::Font * CSFMLManager::GetFont()
+{
+    return &m_Font;
 }

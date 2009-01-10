@@ -115,7 +115,7 @@ void CSprite::Draw(sf::IntRect * _AreaDisplayed)
 //**************************
 void CSprite::Draw(sf::IntRect * _Dest, sf::IntRect * _AreaDisplayed)
 {
-    CSFMLManager * SFMLManager = CSFMLManager::GetInstance();
+    CSFMLManager * SFMLManager = CSFMLManager::GetSingleton();
 
     //if the animation is built
     if ( m_SpriteAnimation->IsBuilt() )

@@ -6,7 +6,7 @@
 #include "../include/constants.h"
 #include "../include/CSpriteAnimation.h"
 
-#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 
 //**************************
@@ -18,6 +18,7 @@ class CSFMLManager
         static CSFMLManager* ms_Singleton;  //Single instance of the SDL Manager
         sf::RenderWindow m_RenderWindow;      //Winfow of the application
         sf::Clock m_Clock;          //clock to know when we are since the beginning of the program
+        sf::Font m_Font;            //font for the game
 
         std::map<int, CSpriteAnimation *> m_ListAnimation;      //map with all animation, (the key is an int defined in constants.h
 
@@ -57,7 +58,7 @@ class CSFMLManager
         //Return Value : the single instance of the CSFMLManager
         //Note : None
         //**************************
-        static CSFMLManager* GetInstance(char * _szTitleWindow = NULL);
+        static CSFMLManager* GetSingleton(char * _szTitleWindow = NULL);
 
         //**************************
         //Description : Display what is on the window
@@ -86,6 +87,10 @@ class CSFMLManager
         //**************************
         CSpriteAnimation * GetAnimation(int _NumAnimation);
 
+        //**************************
+        // Font
+        //**************************
+        sf::Font * GetFont();
 };
 
 #endif // CSFMLManager_H

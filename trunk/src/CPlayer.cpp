@@ -1,6 +1,10 @@
 #include "../include/CPlayer.h"
 #include "../include/CBoard.h"
 
+#include "../include/CSFMLManager.h"
+
+#include <SFML/Graphics/String.hpp>
+
 CPlayer * CPlayer::ms_Players[NUM_COLOR] = { NULL };        //static array wich contain all the players
 int CPlayer::ms_iNbPlayer = 0;        //static number of players
 CPlayer * CPlayer::ms_CurrentPlayer = NULL;        //static pointer toward the current player in game
@@ -109,13 +113,46 @@ void CPlayer::DisplayPlayer()
 {
     m_Sprite->Draw();
 
+    CSFMLManager * Manager = CSFMLManager::GetSingleton();
+
+    sf::Font * Font = Manager->GetFont();
+
+    //we display text
+    char num[2];
+    std::string str;
+    sf::String NumPlayer, ScorePlayer;
+
+    sprintf(num, "%d", (m_iColor-RED+1));
+
+    str = "Player ";
+    str += num;
+
+    NumPlayer.SetText(str);
+    NumPlayer.SetFont(*Font);
+    NumPlayer.SetColor(sf::Color(255,0,0));
+    NumPlayer.Move(0, 0);
+
+    sprintf(num, "%d", m_iScore);
+
+    str = "Score : ";
+    str += num;
+
+    ScorePlayer.SetText(str);
+    ScorePlayer.SetFont(*Font);
+    ScorePlayer.SetColor(sf::Color(255,0,0));
+    ScorePlayer.Move(0, NumPlayer.GetSize());
+
+    m_RenderWindow->Draw(NumPlayer);
+    m_RenderWindow->Draw(ScorePlayer);
+
+    //we display the bonus
     IBonus * Bonus;
 
     for (int i = 0; i < m_ListBonus.size(); i++)
     {
         Bonus = m_ListBonus[i];
 
-        Bonus->DisplaySquare(0, i * Bonus->GetSprite()->GetHeight() );
+        Bonus->DisplaySquare(0, 60 + i * Bonus->GetSprite()->GetHeight() );
     }
 }
 

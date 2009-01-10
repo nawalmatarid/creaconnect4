@@ -14,7 +14,7 @@
 //**************************
 IBonus * CBonusFactory::CreateBonus(int _iTypeBonus)
 {
-    CSFMLManager * Manager = CSFMLManager::GetInstance();
+    CSFMLManager * Manager = CSFMLManager::GetSingleton();
 
     switch(_iTypeBonus)
     {

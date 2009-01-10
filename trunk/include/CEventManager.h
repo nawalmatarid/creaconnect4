@@ -42,7 +42,7 @@ class CEventManager : public IEventNotifier
 		~CEventManager();
 
 		//**************************
-		//Description : Return the singleton og the manager
+		//Description : Return the singleton of the manager
 		//Parameters : The render window
 		//Return Value : The singleton of the manager
 		//Note : None

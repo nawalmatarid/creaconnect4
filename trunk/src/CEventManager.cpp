@@ -1,4 +1,4 @@
-#include "../include/constantes.h"
+#include "../include/constants.h"
 #include "../include/CEventManager.h"
 
 CEventManager * CEventManager::ms_Singleton = NULL;    //single instance of the managter
@@ -38,7 +38,7 @@ CEventManager::~CEventManager()
 }
 
 //**************************
-//Description : Return the singleton og the manager
+//Description : Return the singleton of the manager
 //Parameters : The render window
 //Return Value : The singleton of the manager
 //Note : None
