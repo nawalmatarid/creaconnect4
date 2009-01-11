@@ -13,7 +13,7 @@ CGame::CGame()
     m_bInGame(false),
     m_bEndGame(false)
 {
-    m_SFMLManager = CSFMLManager::GetSingleton("tata");
+    m_SFMLManager = CSFMLManager::GetSingleton();
     m_RenderWindow = m_SFMLManager->GetRenderWindow();
 
     m_EventManager = CEventManager::GetSingleton(m_RenderWindow);
@@ -135,9 +135,6 @@ void CGame::EndGame()
         StrFont.Move(280, 80);
 
         m_RenderWindow->Draw(StrFont);
-
-        //we restart the board
-        m_Board->CreateBoard();
     }
     else
     {
@@ -237,6 +234,12 @@ void CGame::Game()
             float fNow = m_SFMLManager->GetElapsedTime();
 
             while ( m_SFMLManager->GetElapsedTime() < (fNow + 3.0f) );
+
+            //we restart the board and make the players loses their bonus
+            m_Board->CreateBoard();
+
+            for (int i = 0; i < NUM_COLOR; i++)
+                m_Players[i]->LoseBonus();
         }
         else
             //we display the scene
@@ -249,7 +252,11 @@ void CGame::Game()
 
     //we pop the two players
     for (int i = 0; i < NUM_COLOR; i++)
+    {
         m_EventManager->PopEventObserver();
+        delete m_Players[i];
+        m_Players[i] = NULL;
+    }
 }
 
 //**************************

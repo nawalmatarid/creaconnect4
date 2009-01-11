@@ -75,6 +75,14 @@ class CPlayer : public IEventObserver
         void GainBonus(IBonus * _Bonus);
 
         //**************************
+		//Description : The player lose all of this bonus
+		//Parameters : None
+		//Return value : None
+		//Note : This is usually due to an restart of the game, but maybe if we create a new bonus... ^^
+		//**************************
+        void LoseBonus();
+
+        //**************************
         //Description : Actions performed when the listener is notified because an event occurred
         //Parameters : None
         //Return Value : None

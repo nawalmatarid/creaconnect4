@@ -1,10 +1,13 @@
-#include "include/CGame.h"
+#include "include/CSFMLManager.h"
+#include "include/CMenu.h"
 
 int main(int argc, char **argv)
 {
-    CGame * Game = CGame::GetSingleton();
+    //we create the window
+    CSFMLManager::GetSingleton("CreaConnect4");
+    CMenu * Menu = CMenu::GetSingleton();
 
-    Game->StartGame();
+    Menu->StartMenu();
 
     return EXIT_SUCCESS;
 }
