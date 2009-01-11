@@ -171,6 +171,27 @@ void CPlayer::GainBonus(IBonus * _Bonus)
 }
 
 //**************************
+//Description : The player lose all of this bonus
+//Parameters : None
+//Return value : None
+//Note : This is usually due to an restart of the game, but maybe if we create a new bonus... ^^
+//**************************
+void CPlayer::LoseBonus()
+{
+    //we delete the bonus
+    IBonus * Bonus;
+
+    while ( !m_ListBonus.empty() )
+    {
+        Bonus = m_ListBonus.back();
+
+        delete Bonus;
+
+        m_ListBonus.pop_back();
+    }
+}
+
+//**************************
 //Description : Actions performed when the listener is notified because an event occurred
 //Parameters : None
 //Return Value : None

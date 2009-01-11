@@ -11,7 +11,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 //**************************
-//Manage input events and notify Event Observers
+//Game loop
 //**************************
 class CGame : public IEventObserver
 {

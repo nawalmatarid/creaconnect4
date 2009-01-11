@@ -12,6 +12,8 @@
 #define BOARD_X_ORIGIN 155         // origin of the board (on x)
 #define BOARD_Y_ORIGIN 180         // origin of the board (on y)
 
+#define NUMBER_OPTION_MENU 2    //number of option
+
 #define SCOREWIN 5      //score to win the game
 #define NUM_COLOR 2             //number of color
 #define NUM_BONUS 3             //number of bonus
