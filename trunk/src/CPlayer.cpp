@@ -69,7 +69,7 @@ CPlayer::CPlayer(CSpriteAnimation * _Animation, sf::RenderWindow * _RenderWindow
         ms_iNbPlayer++;
     }
 
-    //if it's the irst player created, we set it to the current player
+    //if it's the first player created, we set it to the current player
     if ( ms_CurrentPlayer == NULL )
         ms_CurrentPlayer = this;
 }
@@ -88,19 +88,33 @@ CPlayer::~CPlayer()
         m_ListBonus.pop_back();
     }
 
-    //we pop this player from the list
+    if ( m_Sprite != NULL )
+        delete m_Sprite;
+
+	//we change the current player
+	if ( ms_iNbPlayer != 1 )
+	{
+		if ( ms_CurrentPlayer == this )
+			SetNextPlayer();
+	}
+	else
+	{
+		ms_CurrentPlayer = NULL;
+		ms_iCurrentPlayer = 0;
+	}
+
+	//we pop this player from the list
     int i = 0;
-    while ( i < ms_iNbPlayer && ms_Players[i] != this )
+    while ( i < NUM_COLOR && ms_Players[i] != this )
         i++;
 
-    if ( i < ms_iNbPlayer )
+    if ( i < NUM_COLOR )
     {
         ms_Players[i] = NULL;
         ms_iNbPlayer--;
     }
 
-    if ( m_Sprite != NULL )
-        delete m_Sprite;
+	ms_bNextPlayer = false;
 }
 
 //**************************

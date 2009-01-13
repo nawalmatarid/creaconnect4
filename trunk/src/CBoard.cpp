@@ -117,6 +117,27 @@ void CBoard::CreateBoard()
 }
 
 //**************************
+//Description : Return whether the board is full or not
+//Parameters : None
+//Return value : True if the board is full, otherwise false
+//Note : None
+//**************************
+bool CBoard::BoardFull()
+{
+	bool bFull = true;
+	int i = 0;
+
+	while ( i < DEFAULT_NUM_COLUMNS && bFull )
+	{
+		bFull = (m_Board[i][0] != NULL && !m_Board[i][0]->CanCollide() );
+
+		i++;
+	}
+
+	return bFull;
+}
+
+//**************************
 //Description : Display the board on the screen
 //Parameters : None
 //Return value : None

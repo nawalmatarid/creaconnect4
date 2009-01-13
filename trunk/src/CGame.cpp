@@ -85,8 +85,9 @@ void CGame::DrawScene()
 //**************************
 void CGame::StartGame()
 {
-    //we create the board
-    m_Board = new CBoard(m_SFMLManager->GetAnimation(BOARD), m_RenderWindow);
+    //we create the board if it's not already  done
+	if ( m_Board == NULL )
+		m_Board = new CBoard(m_SFMLManager->GetAnimation(BOARD), m_RenderWindow);
 
     m_Board->CreateBoard();
 
@@ -120,39 +121,49 @@ void CGame::EndGame()
     sf::String StrFont;
     char num[2];
     std::string str;
+	if ( m_Board->BoardFull() )
+	{
+		sprintf(num, "%d", (i+1));
 
-    if ( m_Players[i]->GetScore() < SCOREWIN )
-    {
-        sprintf(num, "%d", (i+1));
+		StrFont.SetText("It's a draw!!!");
+		StrFont.SetFont(*Font);
+		StrFont.SetColor(sf::Color(255,0,0));
+		StrFont.Move(280, 80);
 
-        str = "You won Player ";
-        str += num;
-        str += "!!!";
+		m_RenderWindow->Draw(StrFont);
+	}
+    else if ( m_Players[i]->GetScore() < SCOREWIN )
+		{
+			sprintf(num, "%d", (i+1));
 
-        StrFont.SetText(str);
-        StrFont.SetFont(*Font);
-        StrFont.SetColor(sf::Color(255,0,0));
-        StrFont.Move(280, 80);
+			str = "You won Player ";
+			str += num;
+			str += "!!!";
 
-        m_RenderWindow->Draw(StrFont);
-    }
-    else
-    {
-        sprintf(num, "%d", (i+1));
+			StrFont.SetText(str);
+			StrFont.SetFont(*Font);
+			StrFont.SetColor(sf::Color(255,0,0));
+			StrFont.Move(280, 80);
 
-        str = "Player ";
-        str += num;
-        str += " won the game!!!";
+			m_RenderWindow->Draw(StrFont);
+		}
+		else
+		{
+			sprintf(num, "%d", (i+1));
 
-        StrFont.SetText(str);
-        StrFont.SetFont(*Font);
-        StrFont.SetColor(sf::Color(255,0,0));
-        StrFont.Move(250, 80);
+			str = "Player ";
+			str += num;
+			str += " won the game!!!";
 
-        m_RenderWindow->Draw(StrFont);
+			StrFont.SetText(str);
+			StrFont.SetFont(*Font);
+			StrFont.SetColor(sf::Color(255,0,0));
+			StrFont.Move(250, 80);
 
-        m_bEndGame = true;
-    }
+			m_RenderWindow->Draw(StrFont);
+
+			m_bEndGame = true;
+		}
 }
 
 //**************************
@@ -224,7 +235,7 @@ void CGame::Game()
         DrawScene();
 
         //we drawn the end of a game is the is a winner
-        if ( m_Board->ExistLine() )
+		if ( m_Board->ExistLine() || m_Board->BoardFull() )
         {
             EndGame();
 
@@ -248,7 +259,10 @@ void CGame::Game()
 
     //if it's the end of the game, we show the reward
     if ( m_bEndGame )
+	{
         ShowReward();
+		m_bEndGame = false;
+	}
 
     //we pop the two players
     for (int i = 0; i < NUM_COLOR; i++)

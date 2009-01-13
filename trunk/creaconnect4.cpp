@@ -5,6 +5,8 @@ int main(int argc, char **argv)
 {
     //we create the window
     CSFMLManager::GetSingleton("CreaConnect4");
+
+	//we create the menu and launch it
     CMenu * Menu = CMenu::GetSingleton();
 
     Menu->StartMenu();
