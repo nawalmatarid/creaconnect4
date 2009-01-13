@@ -55,6 +55,14 @@ class CBoard
 		//**************************
         void CreateBoard();
 
+		//**************************
+		//Description : Return whether the board is full or not
+		//Parameters : None
+		//Return value : True if the board is full, otherwise false
+		//Note : None
+		//**************************
+        bool BoardFull();
+
         //**************************
 		//Description : Display the board on the screen
 		//Parameters : None
